@@ -20,7 +20,6 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/files', (req, res) => {
-  console.log('recieved a request for files');
   const files = fs.readdirSync('./server/uploads');
   return res.status(200).json(files);
 });
