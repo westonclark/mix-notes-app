@@ -9,7 +9,6 @@ export default function Feed() {
     fetch('http://localhost:3000/files', { mode: 'cors' })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSongList(data);
       });
   }
@@ -23,7 +22,7 @@ export default function Feed() {
   for (let i = 0; i < songList.length; i++) {
     songs.push(<AudioPlayer songName={songList[i]} key={i}></AudioPlayer>);
   }
-  
+
   return (
     <div id="feed">
       <button onClick={getSongs}>Refresh Feed</button>

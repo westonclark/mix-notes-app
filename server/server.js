@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const app = express();
 const path = require('path');
 let fs = require('fs');
@@ -10,7 +11,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
   destination: function (req, file, cb) {
-    cb(null, './uploads');
+    cb(null, './server/uploads');
   },
 });
 const upload = multer({ storage });
@@ -20,8 +21,12 @@ app.use(cors());
 
 app.get('/files', (req, res) => {
   console.log('recieved a request for files');
-  const files = fs.readdirSync('./uploads');
+  const files = fs.readdirSync('./server/uploads');
   return res.status(200).json(files);
+});
+
+app.get('/uploads/:id', (req, res) => {
+  return res.sendFile(path.join(__dirname + '/uploads/' + req.params.id));
 });
 
 app.post('/addfile', upload.any('name'), (req, res) => {
