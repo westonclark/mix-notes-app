@@ -1,10 +1,20 @@
 import React from 'react';
-import FeedItem from '../components/feedItem.js';
+import AudioPlayer from '../components/audioPlayer.js';
 
 export default function Feed() {
+  let songs;
+  function getSongs() {
+    fetch('http://localhost:3000/files')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   return (
     <div id="feed">
-      <FeedItem></FeedItem>
+      <button onClick={getSongs}>Refresh Feed</button>
+      <AudioPlayer></AudioPlayer>
     </div>
   );
 }
