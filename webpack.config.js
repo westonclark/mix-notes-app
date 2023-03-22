@@ -33,5 +33,4 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
-  proxy: { '*': 'localhost:3000' },
 };

@@ -25,7 +25,10 @@ export default function Feed() {
 
   return (
     <div id="feed">
-      <button onClick={getSongs}>Refresh Feed</button>
+      <span id="library-header">
+        <h2 id="library">Library</h2>
+        <button onClick={getSongs}>Refresh</button>
+      </span>
       {songs}
     </div>
   );
