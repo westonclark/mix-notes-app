@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/files', (req, res) => {
   console.log('recieved a request for files');

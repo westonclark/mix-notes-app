@@ -5,12 +5,11 @@ import DisplayTrack from './displayTrack';
 import Controls from './controls';
 import ProgressBar from './progressBar';
 
-export default function AudioPlayer() {
-
+export default function AudioPlayer({ songName }) {
   return (
     <div className="audio-player">
       <div className="inner">
-        <DisplayTrack />
+        <DisplayTrack songName={songName} />
         <Controls />
         <ProgressBar />
       </div>
