@@ -4,6 +4,17 @@ import AudioPlayer from '../components/audioPlayer.jsx';
 
 export default function Feed() {
   let file;
+
+  const [songList, setSongList] = useState({});
+
+  function getSongs() {
+    fetch('http://localhost:3000/files', { mode: 'cors' })
+      .then((res) => res.json())
+      .then((data) => {
+        setSongList(data);
+      });
+  }
+
   function handleFileSelect(e) {
     file = e.target.files;
     for (let i = 0; i <= file.length - 1; i++) {
@@ -27,16 +38,6 @@ export default function Feed() {
     getSongs();
   }
 
-  const [songList, setSongList] = useState({});
-
-  function getSongs() {
-    fetch('http://localhost:3000/files', { mode: 'cors' })
-      .then((res) => res.json())
-      .then((data) => {
-        setSongList(data);
-      });
-  }
-
   useEffect(() => {
     getSongs();
   }, []);
@@ -49,7 +50,6 @@ export default function Feed() {
   return (
     <div>
       <div id="upload-section"></div>
-
       <div id="feed">
         <span id="library-header">
           <h2 id="library"></h2>
