@@ -1,13 +1,14 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 
 import DisplayTrack from './displayTrack.jsx';
+import DisplayNotes from './displayNotes.jsx';
 
 export default function AudioPlayer({ songName }) {
   return (
     <div className="audio-player">
       <DisplayTrack songName={songName} />
-      {/* <label htmlFor="comments">Add Comments</label>
-      <input id="comments" type="text" name="comments"></input> */}
+      <DisplayNotes />
     </div>
   );
 }

@@ -58,7 +58,9 @@ export default function Feed() {
               Upload a File
             </label>
             <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
-            <button onClick={getSongs}>Refresh</button>
+            <button id="refresh" onClick={getSongs}>
+              Refresh
+            </button>
           </div>
         </span>
         {songs}
