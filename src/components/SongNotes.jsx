@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-export default function DisplayNotes() {
+export default function SongNotes() {
   const [notes, setNotes] = useState([]);
   const [userInput, setUserInput] = useState('');
 

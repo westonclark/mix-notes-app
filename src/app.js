@@ -1,13 +1,13 @@
 import React from 'react';
-import Feed from './containers/feed.jsx';
+import SongFeed from './components/SongFeed.jsx';
 
 const App = () => {
   return (
-    <div>
+    <>
       <h1>Mix Notes</h1>
       <hr></hr>
-      <Feed />
-    </div>
+      <SongFeed />
+    </>
   );
 };
 

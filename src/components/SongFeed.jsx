@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import AudioPlayer from '../components/audioPlayer.jsx';
+import Song from './Song.jsx';
 
 export default function Feed() {
   let file;
@@ -44,27 +44,23 @@ export default function Feed() {
 
   let songs = [];
   for (let i = 0; i < songList.length; i++) {
-    songs.push(<AudioPlayer songName={songList[i]} key={i}></AudioPlayer>);
+    songs.push(<Song songName={songList[i]} key={i}></Song>);
   }
 
   return (
-    <div>
-      <div id="upload-section"></div>
-      <div id="feed">
-        <span id="library-header">
-          <h2 id="library"></h2>
-          <div>
-            <label id="upload" htmlFor="file">
-              Upload a File
-            </label>
-            <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
-            <button id="refresh" onClick={getSongs}>
-              Refresh
-            </button>
-          </div>
-        </span>
-        {songs}
+    <>
+      <div id="upload-section">
+        <div>
+          <label id="upload" htmlFor="file">
+            Upload a File
+          </label>
+          <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
+          <button id="refresh" onClick={getSongs}>
+            Refresh
+          </button>
+        </div>
       </div>
-    </div>
+      <div id="feed">{songs}</div>
+    </>
   );
 }

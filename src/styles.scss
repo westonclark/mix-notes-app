@@ -1,17 +1,19 @@
-html {
-  color-scheme: dark !important;
-  color: #edebe8;
-}
+$color-one: black;
+$color-two: #1e2226;
+$color-three: #95e0b6;
+$color-four: #7caeec;
+$color-five: rgb(233, 233, 234);
+$color-six: rgb(186, 187, 188);
 
+html {
+  color: $color-five;
+}
 body {
-  // height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   font-family: sans-serif;
-  background-color: #131516;
-  // background: rgb(34, 193, 195);
-  // background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 0.743) 100%);
+  background-color: $color-one;
 }
 
 h1 {
@@ -19,22 +21,18 @@ h1 {
 }
 
 hr {
-  border: 0.5px solid rgb(78, 72, 62);
+  border: 0.5px solid $color-six;
 }
 
 #upload-section {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-}
-#library-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // margin: 20px;
 }
 
 #refresh {
-  background-color: rgba($color: #000000, $alpha: 0);
+  background-color: rgba($color: #121212, $alpha: 0);
   color: #edebe8;
   border: 0.5px solid white;
   border-radius: 5px;
@@ -50,38 +48,34 @@ hr {
   font-size: 14px;
 }
 
-#refresh:hover,
-#upload:hover,
-#add-note-button:hover {
-  background-color: rgba(255, 255, 255, 0.099);
-}
 #feed {
-  height: 100vh;
   width: 100%;
 }
 
-.audio-player {
-  border: 0.5px solid rgb(78, 72, 62);
-  border-radius: 5px;
-  padding: 10px;
+.song {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
   margin: 20px;
+  padding: 10px;
   width: 800px;
-  border: 0.5px solid rgb(78, 72, 62);
-  box-shadow: 0 3px 6px rgba(78, 72, 62, 0.16), 0 3px 6px rgba(78, 72, 62, 0.23);
+  background-color: $color-two;
+  border-radius: 1rem;
 }
 
 .name-and-player {
   margin: 5px;
 }
 
+#song-name {
+  margin-inline: 5px;
+  margin-bottom: 5px;
+}
+
 #audio {
   margin: 5px;
   height: 40px;
   width: 400px;
-  filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(0%);
 }
 
 #add-note-and-list {
@@ -102,11 +96,19 @@ hr {
 
 #input-and-button {
   display: flex;
-  // flex-direction: column;
   width: 400px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 10px;
+
+  input {
+    margin-inline: 5px;
+    color: black;
+    &:focus {
+      outline-color: $color-four;
+    }
+  }
+
   button {
     width: 100px;
     background-color: rgba($color: #000000, $alpha: 0);
@@ -121,7 +123,6 @@ hr {
 #notes-list {
   display: flex;
   flex-direction: column;
-  // align-items: center;
   width: 400px;
   margin-right: 10px;
 }
@@ -133,18 +134,11 @@ hr {
 
   input {
     margin-right: 8px;
+    color: black;
   }
 }
 
 #file {
   visibility: hidden;
   width: 0px;
-}
-
-@media (max-width: 400px) {
-  .audio-player {
-    // width: 100%;
-
-    // border: 20px solid white;
-  }
 }
