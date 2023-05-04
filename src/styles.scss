@@ -1,19 +1,20 @@
-$color-one: black;
-$color-two: #1e2226;
-$color-three: #95e0b6;
-$color-four: #7caeec;
-$color-five: rgb(233, 233, 234);
-$color-six: rgb(186, 187, 188);
+$color-bg-one: #1b1b1b;
+$color-bg-two: #222222;
+$color-hl-one: #95e0b6;
+$color-hl-two: #7caeec;
+$color-text-one: rgb(216, 216, 216);
+$color-text-two: rgb(186, 187, 188);
 
 html {
-  color: $color-five;
+  color: $color-text-one;
 }
 body {
-  width: 100vw;
   display: flex;
   justify-content: center;
+  width: 100vw;
   font-family: sans-serif;
-  background-color: $color-one;
+  background-color: $color-bg-one;
+  color-scheme: dark;
 }
 
 h1 {
@@ -21,14 +22,13 @@ h1 {
 }
 
 hr {
-  border: 0.5px solid $color-six;
+  border: 0.5px solid $color-text-two;
 }
 
 #upload-section {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  // margin: 20px;
 }
 
 #refresh {
@@ -48,10 +48,6 @@ hr {
   font-size: 14px;
 }
 
-#feed {
-  width: 100%;
-}
-
 .song {
   display: flex;
   flex-direction: column;
@@ -59,7 +55,7 @@ hr {
   margin: 20px;
   padding: 10px;
   width: 800px;
-  background-color: $color-two;
+  background-color: $color-bg-two;
   border-radius: 1rem;
 }
 
@@ -90,7 +86,7 @@ hr {
 
   input {
     font-size: 14px;
-    color: #edebe8;
+    // color: $color-text-one;
   }
 }
 
@@ -103,9 +99,9 @@ hr {
 
   input {
     margin-inline: 5px;
-    color: black;
+    color: $color-text-one;
     &:focus {
-      outline-color: $color-four;
+      outline-color: $color-hl-two;
     }
   }
 

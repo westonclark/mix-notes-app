@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import Song from './Song.jsx';
 
 export default function Feed() {
-  let file;
-
   const [songList, setSongList] = useState({});
 
   function getSongs() {
-    fetch('http://localhost:3000/files', { mode: 'cors' })
+    fetch('http://localhost:3000/songs', { mode: 'cors' })
       .then((res) => res.json())
       .then((data) => {
         setSongList(data);
@@ -16,7 +14,7 @@ export default function Feed() {
   }
 
   function handleFileSelect(e) {
-    file = e.target.files;
+    const file = e.target.files;
     for (let i = 0; i <= file.length - 1; i++) {
       file = file[i];
     }
@@ -25,13 +23,11 @@ export default function Feed() {
       formData.append('username', 'myCatCrouton');
       formData.append('files', file);
 
-      fetch('http://localhost:3000/addfile', {
+      fetch('http://localhost:3000/songs', {
         method: 'post',
         body: formData,
         mode: 'no-cors',
-      })
-        .then((res) => console.log(res))
-        .catch((err) => ('Error occurred', err));
+      }).catch((err) => ('Error occurred', err));
     }
 
     handleSubmit();
