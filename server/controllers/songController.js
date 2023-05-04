@@ -61,8 +61,6 @@ const songController = {
     const filename = 'dad2';
     const bucketname = 'mixnotesbucket';
     const file = req.file.buffer;
-    console.log(file);
-
     const link = await uploadToS3(filename, bucketname, file);
     console.log(link);
   },
