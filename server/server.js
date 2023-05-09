@@ -11,6 +11,12 @@ const { memoryStorage } = require('multer');
 const storage = memoryStorage();
 const upload = multer({ storage });
 
+const cors = require('cors');
+app.use(cors());
+app.use(express.json());
+
+//OLD
+
 // const multer = require('multer');
 // const storage = multer.diskStorage({
 //   filename: function (req, file, cb) {
@@ -22,26 +28,43 @@ const upload = multer({ storage });
 // });
 // const upload = multer({ storage });
 
-const cors = require('cors');
-app.use(cors());
-app.use(express.json());
-
-app.get('/songs', (req, res) => {
-  const files = fs.readdirSync('./server/uploads');
-  return res.status(200).json(files);
-});
-
 // app.post('/songs', upload.any('name'), (req, res) => {
 //   return res.sendStatus(200);
 // });
 
+// app.get('/songs', (req, res) => {
+//   return res.sendStatus(200);
+// });
+
+// app.get('/uploads/:id', (req, res) => {
+//   return res.sendFile(path.join(__dirname + '/uploads/' + req.params.id));
+// });
+
+// app.get('/songs', (req, res) => {
+//   const files = fs.readdirSync('./server/uploads');
+//   return res.status(200).json(files);
+// });
+
+// NEW
 app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
   return res.sendStatus(200);
 });
 
-app.get('/uploads/:id', (req, res) => {
-  return res.sendFile(path.join(__dirname + '/uploads/' + req.params.id));
-});
+// app.get('/songs', (req, res) => {
+//   return res.sendStatus(200);
+// });
+
+// app.get('/projects', (req, res) => {
+//   return res.sendStatus(200);
+// });
+
+// app.post('/projects', (req, res) => {
+//   return res.sendStatus(200);
+// });
+
+// app.post('/notes', (req, res) => {
+//   return res.sendStatus(200);
+// });
 
 app.use((err, req, res, next) => {
   const defaultErr = {

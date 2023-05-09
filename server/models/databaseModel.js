@@ -15,3 +15,20 @@ module.exports = {
     return pool.query(text, params, callback);
   },
 };
+
+/* 
+Database Schema
+
+Users Table
+id | email | password
+
+Projects Table
+id | name | locked | password | user(foreign key) 
+
+Songs Table
+id | name | url | complete | project(foreign key) 
+
+Notes Table
+id | content | complete | song(foreign key)
+
+*/

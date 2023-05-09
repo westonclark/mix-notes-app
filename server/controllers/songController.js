@@ -3,20 +3,39 @@ const db = require('../models/databaseModel.js');
 const AWS = require('aws-sdk');
 require('dotenv').config();
 
-// Error Creator
-const createErr = (errInfo) => {
-  const { location, type, err } = errInfo;
-  return {
-    log: `songController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in songController.${location}. Check server logs for more details.` },
-  };
-};
-
 const songController = {
+  async uploadSongAudio(req, res, next) {
+    const { name } = req.body;
+
+    const s3 = new AWS.S3({ accessKeyId: process.env.accessKey, secretAccessKey: process.env.secretAcessKey });
+
+    const uploadToS3 = (filename, bucketname, file) => {
+      return new Promise((resolve, reject) => {
+        const params = {
+          Key: filename,
+          Bucket: bucketname,
+          Body: file,
+          // ContentType: 'audio',
+          ACL: 'public-read',
+        };
+
+        s3.upload(params, (err, data) => {
+          if (err) reject(err);
+          else resolve(data);
+        });
+      });
+    };
+
+    const { Location } = await uploadToS3(name, 'mixnotesbucket', req.file.buffer);
+    res.locals.url = Location;
+    return next();
+  },
+
   storeSongData(req, res, next) {
     try {
-      const { song_name, song_url } = req.body;
-      if (song_name == undefined || song_url == undefined) {
+      const { name, project } = req.body;
+      const { url } = res.locals;
+      if (name == undefined || project == undefined) {
         return next(
           createErr({
             location: 'storeSongData',
@@ -25,7 +44,7 @@ const songController = {
           })
         );
       }
-      db.query(`INSERT INTO songs (song_name, song_url, song_complete) VALUES ('${song_name}','${song_url}','false')`);
+      db.query(`INSERT INTO songs (name, url, project, complete) VALUES ('${name}','${url}','${project}','false')`);
       return next();
     } catch (err) {
       return next(
@@ -37,33 +56,15 @@ const songController = {
       );
     }
   },
+};
 
-  async uploadSongAudio(req, res, next) {
-    const s3 = new AWS.S3({ accessKeyId: process.env.accessKey, secretAccessKey: process.env.secretAcessKey });
-
-    const uploadToS3 = (filename, bucketname, file) => {
-      return new Promise((resolve, reject) => {
-        const params = {
-          Key: filename,
-          Bucket: bucketname,
-          Body: file,
-          ContentType: ';audio/mp3',
-          ACL: 'public-read',
-        };
-
-        s3.upload(params, (err, data) => {
-          if (err) reject(err);
-          else resolve(data);
-        });
-      });
-    };
-
-    const filename = 'dad2';
-    const bucketname = 'mixnotesbucket';
-    const file = req.file.buffer;
-    const link = await uploadToS3(filename, bucketname, file);
-    console.log(link);
-  },
+// Error Creator
+const createErr = (errInfo) => {
+  const { location, type, err } = errInfo;
+  return {
+    log: `songController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Error occurred in songController.${location}. Check server logs for more details.` },
+  };
 };
 
 module.exports = songController;
