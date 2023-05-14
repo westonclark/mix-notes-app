@@ -18,41 +18,8 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-//OLD
-
-// const multer = require('multer');
-// const storage = multer.diskStorage({
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   },
-//   destination: function (req, file, cb) {
-//     cb(null, './server/uploads');
-//   },
-// });
-// const upload = multer({ storage });
-
-// app.post('/songs', upload.any('name'), (req, res) => {
-//   return res.sendStatus(200);
-// });
-
-// app.get('/songs', (req, res) => {
-//   return res.sendStatus(200);
-// });
-
-// app.get('/uploads/:id', (req, res) => {
-//   return res.sendFile(path.join(__dirname + '/uploads/' + req.params.id));
-// });
-
-// app.get('/songs', (req, res) => {
-//   const files = fs.readdirSync('./server/uploads');
-//   return res.status(200).json(files);
-// });
-
-// NEW
-app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
-  return res.json(res.locals.songInfo);
-});
-
+// POST
+////////////////////////////////////////////////////////////
 app.post('/users', storeUserData, (req, res) => {
   return res.json(res.locals.userInfo);
 });
@@ -61,25 +28,27 @@ app.post('/projects', createProject, (req, res) => {
   return res.json(res.locals.projectInfo);
 });
 
+app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
+  return res.json(res.locals.songInfo);
+});
+
 app.post('/notes', createNote, (req, res) => {
   return res.json(res.locals.noteInfo);
 });
 
-// app.get('/songs', (req, res) => {
-//   return res.sendStatus(200);
-// });
+// GET
+////////////////////////////////////////////////////////////
+app.get('/projects/:user_id', (req, res) => {
+  return res.json(res.locals.songs);
+});
 
-// app.get('/projects', (req, res) => {
-//   return res.sendStatus(200);
-// });
+app.get('/songs/:project_id', (req, res) => {
+  return res.json(res.locals.songs);
+});
 
-// app.post('/projects', (req, res) => {
-//   return res.sendStatus(200);
-// });
-
-// app.post('/notes', (req, res) => {
-//   return res.sendStatus(200);
-// });
+app.get('/notes/:song_id', (req, res) => {
+  return res.json(res.locals.notes);
+});
 
 // Global Unkown Error Catch
 app.use((err, req, res, next) => {
