@@ -7,6 +7,7 @@ const PORT = 3000;
 const { storeSongData, uploadSongAudio } = require('./controllers/songController.js');
 const { storeUserData } = require('./controllers/userController.js');
 const { createProject } = require('./controllers/projectController.js');
+const { createNote } = require('./controllers/notesController.js');
 
 const multer = require('multer');
 const { memoryStorage } = require('multer');
@@ -60,6 +61,10 @@ app.post('/projects', createProject, (req, res) => {
   return res.json(res.locals.projectInfo);
 });
 
+app.post('/notes', createNote, (req, res) => {
+  return res.json(res.locals.noteInfo);
+});
+
 // app.get('/songs', (req, res) => {
 //   return res.sendStatus(200);
 // });
@@ -76,6 +81,7 @@ app.post('/projects', createProject, (req, res) => {
 //   return res.sendStatus(200);
 // });
 
+// Global Unkown Error Catch
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
@@ -84,7 +90,7 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
-  return res.status(errorObj.status).json(errorObj.message);
+  return res.status(errorObj.status).json(errorObj.message.err);
 });
 
 app.listen(PORT);

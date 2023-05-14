@@ -3,6 +3,15 @@ const db = require('../models/databaseModel.js');
 const AWS = require('aws-sdk');
 require('dotenv').config();
 
+// Middleware Error Generator Function
+const createErr = (errInfo) => {
+  const { location, type, err } = errInfo;
+  return {
+    log: `songController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Missing required fields.` },
+  };
+};
+
 const songController = {
   async uploadSongAudio(req, res, next) {
     const { name } = req.body;
@@ -56,15 +65,6 @@ const songController = {
       );
     }
   },
-};
-
-// Error Creator
-const createErr = (errInfo) => {
-  const { location, type, err } = errInfo;
-  return {
-    log: `songController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in songController.${location}. Check server logs for more details.` },
-  };
 };
 
 module.exports = songController;

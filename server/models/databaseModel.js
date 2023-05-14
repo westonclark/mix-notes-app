@@ -23,12 +23,11 @@ Users Table
 id | email | password
 
 Projects Table
-id | name | locked | password | user(foreign key) 
+id | name | locked | password | user_id (foreign key) 
 
 Songs Table
-id | name | url | complete | project(foreign key) 
+id | name | url | complete | project_id (foreign key) 
 
 Notes Table
-id | content | complete | song(foreign key)
-
+id | content | complete | song_id (foreign key)
 */

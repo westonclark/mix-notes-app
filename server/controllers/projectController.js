@@ -1,6 +1,15 @@
 const express = require('express');
 const db = require('../models/databaseModel.js');
 
+// Middleware Error Generator Function
+const createErr = (errInfo) => {
+  const { location, type, err } = errInfo;
+  return {
+    log: `projectontroller.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Missing required fields.` },
+  };
+};
+
 const projectController = {
   async createProject(req, res, next) {
     try {
@@ -34,14 +43,6 @@ const projectController = {
       );
     }
   },
-};
-
-const createErr = (errInfo) => {
-  const { location, type, err } = errInfo;
-  return {
-    log: `projectController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in projectController.${location}. Check server logs for more details.` },
-  };
 };
 
 module.exports = projectController;

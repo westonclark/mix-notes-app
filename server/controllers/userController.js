@@ -1,6 +1,15 @@
 const express = require('express');
 const db = require('../models/databaseModel.js');
 
+// Middleware Error Generator Function
+const createErr = (errInfo) => {
+  const { location, type, err } = errInfo;
+  return {
+    log: `userController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Missing required fields.` },
+  };
+};
+
 const userController = {
   async storeUserData(req, res, next) {
     try {
@@ -27,15 +36,6 @@ const userController = {
       );
     }
   },
-};
-
-// Error Creator
-const createErr = (errInfo) => {
-  const { location, type, err } = errInfo;
-  return {
-    log: `songController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in songController.${location}. Check server logs for more details.` },
-  };
 };
 
 module.exports = userController;
