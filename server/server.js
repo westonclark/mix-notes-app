@@ -5,6 +5,8 @@ let fs = require('fs');
 const PORT = 3000;
 
 const { storeSongData, uploadSongAudio } = require('./controllers/songController.js');
+const { storeUserData } = require('./controllers/userController.js');
+const { createProject } = require('./controllers/projectController.js');
 
 const multer = require('multer');
 const { memoryStorage } = require('multer');
@@ -48,6 +50,14 @@ app.use(express.json());
 // NEW
 app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
   return res.sendStatus(200);
+});
+
+app.post('/users', storeUserData, (req, res) => {
+  return res.json(res.locals.userInfo);
+});
+
+app.post('/projects', createProject, (req, res) => {
+  return res.json(res.locals.projectInfo);
 });
 
 // app.get('/songs', (req, res) => {
