@@ -4,10 +4,10 @@ const path = require('path');
 let fs = require('fs');
 const PORT = 3000;
 
-const { storeSongData, uploadSongAudio } = require('./controllers/songController.js');
+const { storeSongData, uploadSongAudio, getSongs } = require('./controllers/songController.js');
 const { storeUserData } = require('./controllers/userController.js');
-const { createProject } = require('./controllers/projectController.js');
-const { createNote } = require('./controllers/notesController.js');
+const { createProject, getProjects } = require('./controllers/projectController.js');
+const { createNote, getNotes } = require('./controllers/notesController.js');
 
 const multer = require('multer');
 const { memoryStorage } = require('multer');
@@ -38,16 +38,16 @@ app.post('/notes', createNote, (req, res) => {
 
 // GET
 ////////////////////////////////////////////////////////////
-app.get('/projects/:user_id', (req, res) => {
-  return res.json(res.locals.songs);
+app.get('/projects/:user_id', getProjects, (req, res) => {
+  return res.json(res.locals.projectList);
 });
 
-app.get('/songs/:project_id', (req, res) => {
-  return res.json(res.locals.songs);
+app.get('/songs/:project_id', getSongs, (req, res) => {
+  return res.json(res.locals.songList);
 });
 
-app.get('/notes/:song_id', (req, res) => {
-  return res.json(res.locals.notes);
+app.get('/notes/:song_id', getNotes, (req, res) => {
+  return res.json(res.locals.noteList);
 });
 
 // Global Unkown Error Catch

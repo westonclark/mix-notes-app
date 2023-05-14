@@ -40,6 +40,32 @@ const notesController = {
       );
     }
   },
+  async getNotes(req, res, next) {
+    try {
+      const { song_id } = req.params;
+      if (song_id == undefined) {
+        return next(
+          createErr({
+            location: 'getNotes',
+            type: 'request body',
+            err: 'missing required fields',
+          })
+        );
+      }
+
+      const { rows } = await db.query(`SELECT * from notes WHERE song_id = '${song_id}'`);
+      res.locals.noteList = rows;
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'getNotes',
+          type: 'reading from db',
+          err,
+        })
+      );
+    }
+  },
 };
 
 module.exports = notesController;

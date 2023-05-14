@@ -43,6 +43,33 @@ const projectController = {
       );
     }
   },
+
+  async getProjects(req, res, next) {
+    try {
+      const { user_id } = req.params;
+      if (user_id == undefined) {
+        return next(
+          createErr({
+            location: 'getProjects',
+            type: 'request body',
+            err: 'missing required fields',
+          })
+        );
+      }
+
+      const { rows } = await db.query(`SELECT * from projects WHERE user_id = '${user_id}'`);
+      res.locals.projectList = rows;
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'getProjects',
+          type: 'reading from db',
+          err,
+        })
+      );
+    }
+  },
 };
 
 module.exports = projectController;

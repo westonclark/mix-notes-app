@@ -66,6 +66,33 @@ const songController = {
       );
     }
   },
+
+  async getSongs(req, res, next) {
+    try {
+      const { project_id } = req.params;
+      if (project_id == undefined) {
+        return next(
+          createErr({
+            location: 'getSongs',
+            type: 'request body',
+            err: 'missing required fields',
+          })
+        );
+      }
+
+      const { rows } = await db.query(`SELECT * from songs WHERE project_id = '${project_id}'`);
+      res.locals.songList = rows;
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'getSongs',
+          type: 'reading from db',
+          err,
+        })
+      );
+    }
+  },
 };
 
 module.exports = songController;
