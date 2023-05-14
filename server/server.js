@@ -50,7 +50,7 @@ app.use(express.json());
 
 // NEW
 app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
-  return res.sendStatus(200);
+  return res.json(res.locals.songInfo);
 });
 
 app.post('/users', storeUserData, (req, res) => {
@@ -94,5 +94,3 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT);
-
-// https://wsqfyd7ftd.execute-api.us-east-2.amazonaws.com/dev/osp2watchdogs/girlfriend

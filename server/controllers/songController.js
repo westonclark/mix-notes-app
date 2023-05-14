@@ -40,7 +40,7 @@ const songController = {
     return next();
   },
 
-  storeSongData(req, res, next) {
+  async storeSongData(req, res, next) {
     try {
       const { name, project } = req.body;
       const { url } = res.locals;
@@ -53,7 +53,8 @@ const songController = {
           })
         );
       }
-      db.query(`INSERT INTO songs (name, url, project, complete) VALUES ('${name}','${url}','${project}','false')`);
+      const { rows } = await db.query(`INSERT INTO songs (name, url, project_id, complete) VALUES ('${name}','${url}','${project}','false') RETURNING name, url, project_id, complete`);
+      res.locals.songInfo = rows[0];
       return next();
     } catch (err) {
       return next(
