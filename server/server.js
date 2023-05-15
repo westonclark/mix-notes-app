@@ -1,29 +1,47 @@
-const express = require('express');
-const app = express();
+// Module Imports
 const path = require('path');
 let fs = require('fs');
+
+// Server Initialization
+const express = require('express');
+const app = express();
 const PORT = 3000;
 
-const { storeSongData, uploadSongAudio, getSongs } = require('./controllers/songController.js');
-const { storeUserData } = require('./controllers/userController.js');
+// Middleware Imports
+const { storeUserData, verifyUser } = require('./controllers/userController.js');
 const { createProject, getProjects } = require('./controllers/projectController.js');
-const { createNote, getNotes } = require('./controllers/notesController.js');
+const { storeSongData, uploadSongAudio, getSongs } = require('./controllers/songController.js');
+const { createNote, getNotes, updateNote, deleteNote } = require('./controllers/notesController.js');
 
+// Initialize Temporary Local Memory Storage
 const multer = require('multer');
 const { memoryStorage } = require('multer');
 const storage = memoryStorage();
 const upload = multer({ storage });
 
-const cors = require('cors');
-app.use(cors());
+// Global Middleware
+// const cors = require('cors');
+// app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// POST
+// Serve static files
+app.get('/', (req, res) => {
+  res.status(200).sendFile(__dirname, '../src/index.html');
+});
+
+// Login / Signup
 ////////////////////////////////////////////////////////////
-app.post('/users', storeUserData, (req, res) => {
+app.post('/login', verifyUser, (req, res) => {
   return res.json(res.locals.userInfo);
 });
 
+app.post('/signup', storeUserData, (req, res) => {
+  return res.json(res.locals.userInfo);
+});
+
+// POST
+////////////////////////////////////////////////////////////
 app.post('/projects', createProject, (req, res) => {
   return res.json(res.locals.projectInfo);
 });
@@ -48,6 +66,26 @@ app.get('/songs/:project_id', getSongs, (req, res) => {
 
 app.get('/notes/:song_id', getNotes, (req, res) => {
   return res.json(res.locals.noteList);
+});
+
+// PATCH
+////////////////////////////////////////////////////////////
+app.patch('/notes/:note_id', updateNote, (req, res) => {
+  return res.sendStatus(200);
+});
+
+// DELETE
+////////////////////////////////////////////////////////////
+app.delete('/projects/:project_id', (req, res) => {
+  return res.sendStatus(200);
+});
+
+app.delete('/songs/:song_id', (req, res) => {
+  return res.sendStatus(200);
+});
+
+app.delete('/notes/:note_id', deleteNote, (req, res) => {
+  return res.sendStatus(200);
 });
 
 // Global Unkown Error Catch

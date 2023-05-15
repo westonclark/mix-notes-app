@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../models/databaseModel.js');
+const bcrypt = require('bcryptjs');
 
 // Middleware Error Generator Function
 const createErr = (errInfo) => {
@@ -11,9 +12,11 @@ const createErr = (errInfo) => {
 };
 
 const userController = {
+  // Create User
   async storeUserData(req, res, next) {
     try {
       const { email, password } = req.body;
+
       if (email == undefined || password == undefined) {
         return next(
           createErr({
@@ -23,7 +26,11 @@ const userController = {
           })
         );
       }
-      const { rows } = await db.query(`INSERT INTO users (email, password) VALUES ('${email}','${password}') RETURNING id, email`);
+
+      const hash = await bcrypt.hash(password, 5);
+
+      const { rows } = await db.query(`INSERT INTO users (email, password) VALUES ('${email}','${hash}') RETURNING id, email`);
+
       res.locals.userInfo = rows[0];
       return next();
     } catch (err) {
@@ -31,6 +38,56 @@ const userController = {
         createErr({
           location: 'storeSongData',
           type: 'writing to db',
+          err,
+        })
+      );
+    }
+  },
+
+  // Verify User
+  async verifyUser(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      if (email == undefined || password == undefined) {
+        return next(
+          createErr({
+            location: 'verifyUser',
+            type: 'request body',
+            err: 'missing required fields',
+          })
+        );
+      }
+      const { rows } = await db.query(`SELECT * FROM users WHERE email = '${email}'`);
+
+      if (!rows.length)
+        return next(
+          createErr({
+            location: 'verifyUser',
+            type: 'reading from db',
+            err: 'Incorrect Email or Password',
+          })
+        );
+
+      const match = await bcrypt.compare(password, rows[0].password);
+
+      if (match) {
+        res.locals.userInfo = rows[0].id;
+        return next();
+      } else {
+        return next(
+          createErr({
+            location: 'verifyUser',
+            type: 'reading from db',
+            err: 'incorrect email or password',
+          })
+        );
+      }
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'verifyUser',
+          type: 'reading from db',
           err,
         })
       );

@@ -51,7 +51,7 @@ const projectController = {
         return next(
           createErr({
             location: 'getProjects',
-            type: 'request body',
+            type: 'request parameters',
             err: 'missing required fields',
           })
         );

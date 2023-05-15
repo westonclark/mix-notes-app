@@ -17,8 +17,38 @@ body {
   color-scheme: dark;
 }
 
-h1 {
-  text-align: center;
+#login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  width: 25vw;
+  background-color: $color-bg-two;
+  border: .5px solid white;
+  border-radius: 1rem;
+  margin-top: 25vh;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+      margin: 10px;
+    }
+    button {
+      margin: 10px;
+    }
+  }
+}
+
+#no-account-box {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: $color-bg-two;
+  border: .5px solid white;
+  border-radius: 1rem;
+  margin-top: 20px;
 }
 
 hr {

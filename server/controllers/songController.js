@@ -74,7 +74,7 @@ const songController = {
         return next(
           createErr({
             location: 'getSongs',
-            type: 'request body',
+            type: 'request parameters',
             err: 'missing required fields',
           })
         );

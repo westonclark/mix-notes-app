@@ -5,13 +5,13 @@ import Song from './Song.jsx';
 export default function Feed() {
   const [songList, setSongList] = useState({});
 
-  function getSongs() {
-    fetch('http://localhost:3000/songs', { mode: 'cors' })
-      .then((res) => res.json())
-      .then((data) => {
-        setSongList(data);
-      });
-  }
+  // function getSongs() {
+  //   fetch('http://localhost:3000/songs', { mode: 'cors' })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setSongList(data);
+  //     });
+  // }
 
   function handleFileSelect(e) {
     const file = e.target.files;
@@ -31,12 +31,12 @@ export default function Feed() {
     }
 
     handleSubmit();
-    getSongs();
+    // getSongs();
   }
 
-  useEffect(() => {
-    getSongs();
-  }, []);
+  // useEffect(() => {
+  //   getSongs();
+  // }, []);
 
   let songs = [];
   for (let i = 0; i < songList.length; i++) {
@@ -51,9 +51,7 @@ export default function Feed() {
             Upload a File
           </label>
           <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
-          <button id="refresh" onClick={getSongs}>
-            Refresh
-          </button>
+          <button id="refresh">Refresh</button>
         </div>
       </div>
       <div id="feed">{songs}</div>

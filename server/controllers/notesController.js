@@ -40,6 +40,7 @@ const notesController = {
       );
     }
   },
+
   async getNotes(req, res, next) {
     try {
       const { song_id } = req.params;
@@ -47,7 +48,7 @@ const notesController = {
         return next(
           createErr({
             location: 'getNotes',
-            type: 'request body',
+            type: 'request parameters',
             err: 'missing required fields',
           })
         );
@@ -61,6 +62,59 @@ const notesController = {
         createErr({
           location: 'getNotes',
           type: 'reading from db',
+          err,
+        })
+      );
+    }
+  },
+
+  async updateNote(req, res, next) {
+    try {
+      const { note_id } = req.params;
+      const { newValue } = req.body;
+      if (note_id == undefined) {
+        return next(
+          createErr({
+            location: 'updateNotes',
+            type: 'request parameters',
+            err: 'missing required fields',
+          })
+        );
+      }
+
+      const { rows } = await db.query(`UPDATE notes SET complete = '${newValue}' WHERE id = '${note_id}'`);
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'getNotes',
+          type: 'reading from db',
+          err,
+        })
+      );
+    }
+  },
+
+  async deleteNote(req, res, next) {
+    try {
+      const { note_id } = req.params;
+      if (note_id == undefined) {
+        return next(
+          createErr({
+            location: 'deleteNote',
+            type: 'request parameters',
+            err: 'missing required fields',
+          })
+        );
+      }
+
+      await db.query(`DELETE FROM notes WHERE id = '${note_id}'`);
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'deleteNotes',
+          type: 'deleting from db',
           err,
         })
       );
