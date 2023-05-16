@@ -17,16 +17,22 @@ body {
   color-scheme: dark;
 }
 
-#login-box {
+#login-box,
+#signup-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px;
   width: 25vw;
   background-color: $color-bg-two;
-  border: .5px solid white;
+  border: 0.5px solid white;
   border-radius: 1rem;
   margin-top: 25vh;
+
+  #login-error,
+  #signup-error {
+    color: red;
+  }
 
   form {
     display: flex;
@@ -41,12 +47,13 @@ body {
   }
 }
 
-#no-account-box {
+#no-account-box,
+#already-have-account-box {
   margin: 10px;
   display: flex;
   justify-content: center;
   background-color: $color-bg-two;
-  border: .5px solid white;
+  border: 0.5px solid white;
   border-radius: 1rem;
   margin-top: 20px;
 }

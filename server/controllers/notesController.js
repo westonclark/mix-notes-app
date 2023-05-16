@@ -6,7 +6,7 @@ const createErr = (errInfo) => {
   const { location, type, err } = errInfo;
   return {
     log: `noteController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Missing required fields.` },
+    message: { err },
   };
 };
 

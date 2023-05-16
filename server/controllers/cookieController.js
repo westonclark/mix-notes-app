@@ -1,7 +1,6 @@
 // const Express = require('express');
 // import bcrypt from 'bcryptjs';
 
-
 // const cookieController = {
 //   // Creating cookie using the userId
 //   async setCookie(req, res, next) {

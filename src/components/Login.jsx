@@ -12,10 +12,12 @@ function Login() {
     axios
       .post('/login', { email, password })
       .then((response) => {
-        console.log(response);
-        navigate('/home');
+        if (response.data.match) {
+          navigate('/home');
+        }
       })
       .catch((error) => {
+        document.getElementById('login-error').innerHTML = error.response.data;
         console.log(error.response.data);
       });
   }
@@ -24,10 +26,11 @@ function Login() {
     <div id="login-shell">
       <div id="login-box">
         <h1>Log in</h1>
+        <div id="login-error"></div>
         <form>
           <input
             type="text"
-            id="email"
+            id="login-email"
             placeholder="email"
             onChange={(e) => {
               setEmail(e.target.value);
@@ -35,12 +38,11 @@ function Login() {
 
           <input
             type="password"
-            id="password"
+            id="login-password"
             placeholder="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}></input>
-
           <button
             type="submit"
             onClick={(e) => {

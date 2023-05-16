@@ -33,11 +33,11 @@ app.get('/', (req, res) => {
 // Login / Signup
 ////////////////////////////////////////////////////////////
 app.post('/login', verifyUser, (req, res) => {
-  return res.json(res.locals.userInfo);
+  return res.json(res.locals);
 });
 
 app.post('/signup', storeUserData, (req, res) => {
-  return res.json(res.locals.userInfo);
+  return res.json(res.locals);
 });
 
 // POST

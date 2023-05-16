@@ -12,22 +12,26 @@ function Signup() {
     axios
       .post('/signup', { email, password })
       .then((response) => {
-        console.log(response.data);
-        navigate('/home');
+        if (response.data.match) {
+          navigate('/home');
+        }
       })
       .catch((error) => {
+        document.getElementById('signup-error').innerHTML = error.response.data;
         console.log(error.response.data);
       });
   }
 
   return (
-    <div id="login-shell">
-      <div id="login-box">
+    <div id="signup-shell">
+      <div id="signup-box">
         <h1>Sign up</h1>
+        <div id="signup-error"></div>
+
         <form>
           <input
             type="text"
-            id="email"
+            id="signup-email"
             placeholder="email"
             onChange={(e) => {
               setEmail(e.target.value);
@@ -35,7 +39,7 @@ function Signup() {
 
           <input
             type="password"
-            id="password"
+            id="signup-password"
             placeholder="password"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -50,7 +54,7 @@ function Signup() {
           </button>
         </form>
       </div>
-      <div id="no-account-box">
+      <div id="already-have-account-box">
         <p>
           Have an account? <Link to="/">Log in</Link>
         </p>

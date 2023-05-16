@@ -7,7 +7,7 @@ const createErr = (errInfo) => {
   const { location, type, err } = errInfo;
   return {
     log: `userController.${location} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Missing required fields.` },
+    message: { err },
   };
 };
 
@@ -17,12 +17,12 @@ const userController = {
     try {
       const { email, password } = req.body;
 
-      if (email == undefined || password == undefined) {
+      if (email == undefined || email == '' || password == '' || password == undefined) {
         return next(
           createErr({
             location: 'storeUserData',
             type: 'request body',
-            err: 'missing required fields',
+            err: 'Missing Required Fields',
           })
         );
       }
@@ -32,13 +32,14 @@ const userController = {
       const { rows } = await db.query(`INSERT INTO users (email, password) VALUES ('${email}','${hash}') RETURNING id, email`);
 
       res.locals.userInfo = rows[0];
+      res.locals.match = true;
       return next();
     } catch (err) {
       return next(
         createErr({
           location: 'storeSongData',
           type: 'writing to db',
-          err,
+          err: 'Error Creating User',
         })
       );
     }
@@ -48,12 +49,13 @@ const userController = {
   async verifyUser(req, res, next) {
     try {
       const { email, password } = req.body;
-      if (email == undefined || password == undefined) {
+      console.log(email, password);
+      if (email == undefined || email == '' || password == '' || password == undefined) {
         return next(
           createErr({
             location: 'verifyUser',
             type: 'request body',
-            err: 'missing required fields',
+            err: 'Missing Required Fields',
           })
         );
       }
@@ -72,6 +74,8 @@ const userController = {
 
       if (match) {
         res.locals.userInfo = rows[0].id;
+        res.locals.match = match;
+
         return next();
       } else {
         return next(
@@ -88,7 +92,7 @@ const userController = {
         createErr({
           location: 'verifyUser',
           type: 'reading from db',
-          err,
+          err: 'Incorrect Username or Password',
         })
       );
     }
