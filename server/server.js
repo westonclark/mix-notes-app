@@ -1,6 +1,7 @@
 // Module Imports
 const path = require('path');
 let fs = require('fs');
+const cookieParser = require('cookie-parser');
 
 // Server Initialization
 const express = require('express');
@@ -12,6 +13,7 @@ const { storeUserData, verifyUser } = require('./controllers/userController.js')
 const { createProject, getProjects } = require('./controllers/projectController.js');
 const { storeSongData, uploadSongAudio, getSongs } = require('./controllers/songController.js');
 const { createNote, getNotes, updateNote, deleteNote } = require('./controllers/notesController.js');
+const { setCookie, checkCookie, deleteCookie } = require('./controllers/cookieController.js');
 
 // Initialize Temporary Local Memory Storage
 const multer = require('multer');
@@ -24,6 +26,7 @@ const upload = multer({ storage });
 // app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Serve static files
 app.get('/', (req, res) => {
@@ -32,12 +35,26 @@ app.get('/', (req, res) => {
 
 // Login / Signup
 ////////////////////////////////////////////////////////////
-app.post('/login', verifyUser, (req, res) => {
+app.post('/login', verifyUser, setCookie, (req, res) => {
   return res.json(res.locals);
 });
 
-app.post('/signup', storeUserData, (req, res) => {
+app.post('/signup', storeUserData, setCookie, (req, res) => {
   return res.json(res.locals);
+});
+
+// GET
+////////////////////////////////////////////////////////////
+app.get('/projects', checkCookie, getProjects, (req, res) => {
+  return res.json(res.locals.projectList);
+});
+
+app.get('/songs/:project_id', getSongs, (req, res) => {
+  return res.json(res.locals.songList);
+});
+
+app.get('/notes/:song_id', getNotes, (req, res) => {
+  return res.json(res.locals.noteList);
 });
 
 // POST
@@ -52,20 +69,6 @@ app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (
 
 app.post('/notes', createNote, (req, res) => {
   return res.json(res.locals.noteInfo);
-});
-
-// GET
-////////////////////////////////////////////////////////////
-app.get('/projects/:user_id', getProjects, (req, res) => {
-  return res.json(res.locals.projectList);
-});
-
-app.get('/songs/:project_id', getSongs, (req, res) => {
-  return res.json(res.locals.songList);
-});
-
-app.get('/notes/:song_id', getNotes, (req, res) => {
-  return res.json(res.locals.noteList);
 });
 
 // PATCH

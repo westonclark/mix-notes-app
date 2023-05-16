@@ -46,12 +46,12 @@ const projectController = {
 
   async getProjects(req, res, next) {
     try {
-      const { user_id } = req.params;
+      const { user_id } = res.locals;
       if (user_id == undefined) {
         return next(
           createErr({
             location: 'getProjects',
-            type: 'request parameters',
+            type: 'cookie parameters',
             err: 'missing required fields',
           })
         );

@@ -31,7 +31,7 @@ const userController = {
 
       const { rows } = await db.query(`INSERT INTO users (email, password) VALUES ('${email}','${hash}') RETURNING id, email`);
 
-      res.locals.userInfo = rows[0];
+      res.locals.user_id = rows[0].id;
       res.locals.match = true;
       return next();
     } catch (err) {
@@ -49,7 +49,6 @@ const userController = {
   async verifyUser(req, res, next) {
     try {
       const { email, password } = req.body;
-      console.log(email, password);
       if (email == undefined || email == '' || password == '' || password == undefined) {
         return next(
           createErr({
@@ -73,7 +72,7 @@ const userController = {
       const match = await bcrypt.compare(password, rows[0].password);
 
       if (match) {
-        res.locals.userInfo = rows[0].id;
+        res.locals.user_id = rows[0].id;
         res.locals.match = match;
 
         return next();
