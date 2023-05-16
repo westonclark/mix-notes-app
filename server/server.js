@@ -35,17 +35,17 @@ app.get('/', (req, res) => {
 
 // Login / Signup
 ////////////////////////////////////////////////////////////
-app.post('/login', verifyUser, setCookie, (req, res) => {
+app.post('/api/login', verifyUser, setCookie, (req, res) => {
   return res.json(res.locals);
 });
 
-app.post('/signup', storeUserData, setCookie, (req, res) => {
+app.post('/api/signup', storeUserData, setCookie, (req, res) => {
   return res.json(res.locals);
 });
 
 // GET
 ////////////////////////////////////////////////////////////
-app.get('/projects', checkCookie, getProjects, (req, res) => {
+app.get('/api/projects', checkCookie, getProjects, (req, res) => {
   return res.json(res.locals.projectList);
 });
 

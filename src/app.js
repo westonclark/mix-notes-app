@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './components/Login.jsx';
 import SongList from './components/SongList.jsx';
@@ -23,6 +23,13 @@ const App = () => {
   ]);
   return (
     <>
+      {/* <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login></Login>}></Route>
+          <Route path="/signup" element={<Signup></Signup>}></Route>
+          <Route path="/home" element={<ProjectList></ProjectList>}></Route>
+        </Routes>
+      </BrowserRouter> */}
       <RouterProvider router={router} />
       {/* <h1>Mix Notes</h1>
       <hr></hr> */}

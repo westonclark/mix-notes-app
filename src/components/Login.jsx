@@ -10,7 +10,7 @@ function Login() {
   function handleSumbit(e) {
     e.preventDefault();
     axios
-      .post('/login', { email, password })
+      .post('/api/login', { email, password })
       .then((response) => {
         if (response.data.match) {
           navigate('/home');
