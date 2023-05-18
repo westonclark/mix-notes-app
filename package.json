@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@picocss/pico": "^1.5.10",
     "aws-sdk": "^2.1371.0",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",

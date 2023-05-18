@@ -22,8 +22,6 @@ const storage = memoryStorage();
 const upload = multer({ storage });
 
 // Global Middleware
-// const cors = require('cors');
-// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -45,7 +43,7 @@ app.post('/api/signup', storeUserData, setCookie, (req, res) => {
 
 // GET
 ////////////////////////////////////////////////////////////
-app.get('/api/projects', checkCookie, getProjects, (req, res) => {
+app.get('/api/project', checkCookie, getProjects, (req, res) => {
   return res.json(res.locals.projectList);
 });
 
@@ -59,7 +57,7 @@ app.get('/notes/:song_id', getNotes, (req, res) => {
 
 // POST
 ////////////////////////////////////////////////////////////
-app.post('/projects', createProject, (req, res) => {
+app.post('/api/projects', createProject, (req, res) => {
   return res.json(res.locals.projectInfo);
 });
 

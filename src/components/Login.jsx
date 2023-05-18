@@ -23,40 +23,34 @@ function Login() {
   }
 
   return (
-    <div id="login-shell">
-      <div id="login-box">
-        <h1>Log in</h1>
-        <div id="login-error"></div>
-        <form>
-          <input
-            type="text"
-            id="login-email"
-            placeholder="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}></input>
+    <div id="login">
+      <h1>Log in</h1>
+      <form>
+        <input
+          type="text"
+          placeholder="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}></input>
 
-          <input
-            type="password"
-            id="login-password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}></input>
-          <button
-            type="submit"
-            onClick={(e) => {
-              handleSumbit(e);
-            }}>
-            Log in
-          </button>
-        </form>
-      </div>
-      <div id="no-account-box">
-        <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
-      </div>
+        <input
+          type="password"
+          placeholder="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}></input>
+        <div id="login-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+        <button
+          type="submit"
+          onClick={(e) => {
+            handleSumbit(e);
+          }}>
+          Log in
+        </button>
+      </form>
+      <p>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </p>
     </div>
   );
 }

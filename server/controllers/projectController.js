@@ -13,7 +13,7 @@ const createErr = (errInfo) => {
 const projectController = {
   async createProject(req, res, next) {
     try {
-      const { name, locked, user_id } = req.body;
+      const { name, locked, password, user_id } = req.body;
       if (name == undefined || locked == undefined || user_id == undefined) {
         return next(
           createErr({
@@ -25,7 +25,7 @@ const projectController = {
       }
 
       if (locked) {
-        const { rows } = await db.query(`INSERT INTO projects (name, password, locked, user_id) VALUES ('${name}','${password}','${locked}','${user_id}') RETURNING name, password, locked, user_id`);
+        const { rows } = await db.query(`INSERT INTO projects (name, locked, password, user_id) VALUES ('${name}','${locked}', '${password}','${user_id}') RETURNING name, locked, password, user_id`);
         res.locals.projectInfo = rows[0];
         return next();
       } else {

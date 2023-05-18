@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 function ProjectList() {
   const [projects, setProjects] = useState([]);
+  const navigate = useNavigate();
 
   function getProjects() {
     axios
-      .get('/api/projects')
+      .get('/api/project')
       .then((response) => {
-        console.log(response);
         setProjects(response.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        if (error.response.status == 301) navigate('/');
+        console.log(error.response);
       });
   }
+
   useEffect(() => {
     getProjects();
   }, []);
 
   const projectComponents = [];
-
   for (let i = 0; i < projects.length; i++) {
     projectComponents.push(
-      <div className="project-shell" key={projects[i].name}>
-        <button className="project-button">{projects[i].name}</button>
-        <p>
-          locked: <span className="locked-status">{projects[i].locked.toString()}</span>
-        </p>
-      </div>
+      <article key={projects[i].name}>
+        <a
+          href="/"
+          // role="button"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(`/songs/?projectId=${projects[i].name}`);
+          }}>
+          {projects[i].name}
+        </a>
+      </article>
     );
   }
+
   return (
-    <div id="projects-shell">
+    <>
       <h1>Your Projects</h1>
-      <div id="new-project-header">
-        <button id="new-project">New Project</button>
-      </div>
-      <div id="projects-display">{projectComponents}</div>
-    </div>
+      <section className="grid">{projectComponents}</section>
+      <button>New Project</button>
+    </>
   );
 }
 export default ProjectList;

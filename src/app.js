@@ -20,20 +20,15 @@ const App = () => {
       path: '/signup',
       element: <Signup />,
     },
+    {
+      path: '/songs',
+      element: <SongList />,
+    },
   ]);
   return (
-    <>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login></Login>}></Route>
-          <Route path="/signup" element={<Signup></Signup>}></Route>
-          <Route path="/home" element={<ProjectList></ProjectList>}></Route>
-        </Routes>
-      </BrowserRouter> */}
+    <main>
       <RouterProvider router={router} />
-      {/* <h1>Mix Notes</h1>
-      <hr></hr> */}
-    </>
+    </main>
   );
 };
 

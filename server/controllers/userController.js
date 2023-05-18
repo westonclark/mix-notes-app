@@ -81,7 +81,7 @@ const userController = {
           createErr({
             location: 'verifyUser',
             type: 'reading from db',
-            err: 'incorrect email or password',
+            err: 'Incorrect Email or Password',
           })
         );
       }
@@ -91,7 +91,7 @@ const userController = {
         createErr({
           location: 'verifyUser',
           type: 'reading from db',
-          err: 'Incorrect Username or Password',
+          err: 'Incorrect Email or Password',
         })
       );
     }

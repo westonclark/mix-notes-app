@@ -1,9 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Song from './Song.jsx';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Feed() {
+  const [queryParameters] = useSearchParams();
+  // const [projectId, setProjectId] = useState('');
   const [songList, setSongList] = useState({});
+
+  console.log('projectid', queryParameters.get('projectId'));
 
   // function getSongs() {
   //   fetch('http://localhost:3000/songs', { mode: 'cors' })

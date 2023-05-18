@@ -23,42 +23,36 @@ function Signup() {
   }
 
   return (
-    <div id="signup-shell">
-      <div id="signup-box">
-        <h1>Sign up</h1>
-        <div id="signup-error"></div>
+    <div id="signup">
+      <h1>Sign up</h1>
 
-        <form>
-          <input
-            type="text"
-            id="signup-email"
-            placeholder="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}></input>
+      <form>
+        <input
+          type="text"
+          placeholder="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}></input>
 
-          <input
-            type="password"
-            id="signup-password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}></input>
+        <input
+          type="password"
+          placeholder="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}></input>
+        <div id="signup-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+        <button
+          type="submit"
+          onClick={(e) => {
+            handleSumbit(e);
+          }}>
+          Sign up
+        </button>
+      </form>
 
-          <button
-            type="submit"
-            onClick={(e) => {
-              handleSumbit(e);
-            }}>
-            Sign up
-          </button>
-        </form>
-      </div>
-      <div id="already-have-account-box">
-        <p>
-          Have an account? <Link to="/">Log in</Link>
-        </p>
-      </div>
+      <p>
+        Have an account? <Link to="/">Log in</Link>
+      </p>
     </div>
   );
 }
