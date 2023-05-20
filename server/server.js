@@ -43,11 +43,11 @@ app.post('/api/signup', storeUserData, setCookie, (req, res) => {
 
 // GET
 ////////////////////////////////////////////////////////////
-app.get('/api/project', checkCookie, getProjects, (req, res) => {
+app.get('/api/projects', checkCookie, getProjects, (req, res) => {
   return res.json(res.locals.projectList);
 });
 
-app.get('/songs/:project_id', getSongs, (req, res) => {
+app.get('/api/songs/:project_id', getSongs, (req, res) => {
   return res.json(res.locals.songList);
 });
 

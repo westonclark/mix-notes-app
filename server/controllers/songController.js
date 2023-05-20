@@ -14,8 +14,8 @@ const createErr = (errInfo) => {
 
 const songController = {
   async uploadSongAudio(req, res, next) {
-    const { name } = req.body;
-
+    const { name, project_name } = req.body;
+    const awsName = `${project_name}/${name}`;
     const s3 = new AWS.S3({ accessKeyId: process.env.accessKey, secretAccessKey: process.env.secretAcessKey });
 
     const uploadToS3 = (filename, bucketname, file) => {
@@ -24,7 +24,6 @@ const songController = {
           Key: filename,
           Bucket: bucketname,
           Body: file,
-          // ContentType: 'audio',
           ACL: 'public-read',
         };
 
@@ -35,7 +34,7 @@ const songController = {
       });
     };
 
-    const { Location } = await uploadToS3(name, 'mixnotesbucket', req.file.buffer);
+    const { Location } = await uploadToS3(awsName, 'mixnotesbucket', req.file.buffer);
     res.locals.url = Location;
     return next();
   },
@@ -53,7 +52,6 @@ const songController = {
           })
         );
       }
-      console.log(name, url, project_id);
       const { rows } = await db.query(`INSERT INTO songs (name, url, project_id, complete) VALUES ('${name}','${url}',${project_id},false) RETURNING name, url, project_id, complete`);
       res.locals.songInfo = rows[0];
       return next();

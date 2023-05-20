@@ -9,7 +9,7 @@ function ProjectList() {
 
   function getProjects() {
     axios
-      .get('/api/project')
+      .get('/api/projects')
       .then((response) => {
         setProjects(response.data);
       })
