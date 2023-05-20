@@ -40,7 +40,9 @@ function Signup() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}></input>
+
         <div id="signup-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+
         <button
           type="submit"
           onClick={(e) => {

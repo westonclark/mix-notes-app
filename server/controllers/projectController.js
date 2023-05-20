@@ -13,7 +13,8 @@ const createErr = (errInfo) => {
 const projectController = {
   async createProject(req, res, next) {
     try {
-      const { name, locked, password, user_id } = req.body;
+      const { name, locked, password } = req.body;
+      const { user_id } = req.cookies;
       if (name == undefined || locked == undefined || user_id == undefined) {
         return next(
           createErr({

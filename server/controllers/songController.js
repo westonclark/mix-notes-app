@@ -42,9 +42,9 @@ const songController = {
 
   async storeSongData(req, res, next) {
     try {
-      const { name, project } = req.body;
+      const { name, project_id } = req.body;
       const { url } = res.locals;
-      if (name == undefined || project == undefined) {
+      if (name == undefined || project_id == undefined) {
         return next(
           createErr({
             location: 'storeSongData',
@@ -53,7 +53,8 @@ const songController = {
           })
         );
       }
-      const { rows } = await db.query(`INSERT INTO songs (name, url, project_id, complete) VALUES ('${name}','${url}','${project}','false') RETURNING name, url, project_id, complete`);
+      console.log(name, url, project_id);
+      const { rows } = await db.query(`INSERT INTO songs (name, url, project_id, complete) VALUES ('${name}','${url}',${project_id},false) RETURNING name, url, project_id, complete`);
       res.locals.songInfo = rows[0];
       return next();
     } catch (err) {

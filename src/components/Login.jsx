@@ -25,6 +25,7 @@ function Login() {
   return (
     <div id="login">
       <h1>Log in</h1>
+
       <form>
         <input
           type="text"
@@ -39,7 +40,9 @@ function Login() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}></input>
+
         <div id="login-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+
         <button
           type="submit"
           onClick={(e) => {
@@ -48,6 +51,7 @@ function Login() {
           Log in
         </button>
       </form>
+
       <p>
         Don't have an account? <Link to="/signup">Sign up</Link>
       </p>

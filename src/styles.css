@@ -37,26 +37,72 @@
 }
 
 #login,
-#signup {
+#signup,
+#create-project {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 10vh;
 }
 
+#new-project {
+  display: flex;
+  justify-content: flex-end;
+  /* margin-bottom: 20px; */
+}
+
+#projects,
+#songs {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* align-items: center; */
+}
+
 form {
   width: 30vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .grid {
-  /* border: 1px solid red; */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* see notes below */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* see notes below */
 }
 
 article {
   text-align: center;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--primary-focus);
+
+  &:hover {
+    border: 1px solid var(--primary);
+    /* --transition: 0.2s ease-in-out; */
+  }
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+    /* --transition: 0.2s ease-in-out; */
+  }
+}
+
+#upload-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#upload {
+  display: flex;
+}
+
+#file {
+  display: none;
+}
+
+#refresh {
+  width: 160px;
+  margin-left: 20px;
 }

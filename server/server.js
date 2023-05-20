@@ -61,7 +61,7 @@ app.post('/api/projects', createProject, (req, res) => {
   return res.json(res.locals.projectInfo);
 });
 
-app.post('/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
+app.post('/api/songs', upload.single('audiofile'), uploadSongAudio, storeSongData, (req, res) => {
   return res.json(res.locals.songInfo);
 });
 
