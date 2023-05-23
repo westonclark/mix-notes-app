@@ -51,7 +51,7 @@ app.get('/api/songs/:project_id', getSongs, (req, res) => {
   return res.json(res.locals.songList);
 });
 
-app.get('/notes/:song_id', getNotes, (req, res) => {
+app.get('/api/notes/:song_id', getNotes, (req, res) => {
   return res.json(res.locals.noteList);
 });
 
@@ -65,13 +65,13 @@ app.post('/api/songs', upload.single('audiofile'), uploadSongAudio, storeSongDat
   return res.json(res.locals.songInfo);
 });
 
-app.post('/notes', createNote, (req, res) => {
+app.post('/api/notes', createNote, (req, res) => {
   return res.json(res.locals.noteInfo);
 });
 
 // PATCH
 ////////////////////////////////////////////////////////////
-app.patch('/notes/:note_id', updateNote, (req, res) => {
+app.patch('/api/notes/:note_id', updateNote, (req, res) => {
   return res.sendStatus(200);
 });
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 function ProjectList() {
+  const [queryParameters] = useSearchParams();
   const [projects, setProjects] = useState([]);
+  const [email, setEmail] = useState(queryParameters.get('email'));
   const navigate = useNavigate();
 
   function getProjects() {
@@ -30,7 +32,7 @@ function ProjectList() {
         key={projects[i].name}
         onClick={(e) => {
           e.preventDefault();
-          navigate(`/songs/?projectName=${projects[i].name}&projectId=${projects[i].id}`);
+          navigate(`/songs/?email=${email}&projectName=${projects[i].name}&projectId=${projects[i].id}`);
         }}>
         <a>{projects[i].name}</a>
       </article>

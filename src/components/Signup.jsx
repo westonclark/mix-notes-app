@@ -41,7 +41,7 @@ function Signup() {
             setPassword(e.target.value);
           }}></input>
 
-        <div id="signup-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+        <div id="signup-error" style={{ color: '#FF0000', marginBottom: '20px', textAlign: 'center' }}></div>
 
         <button
           type="submit"
@@ -53,7 +53,7 @@ function Signup() {
       </form>
 
       <p>
-        Have an account? <Link to="/">Log in</Link>
+        Already have an account? <Link to="/">Log in</Link>
       </p>
     </div>
   );

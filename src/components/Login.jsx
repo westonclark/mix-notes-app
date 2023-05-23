@@ -13,7 +13,7 @@ function Login() {
       .post('/api/login', { email, password })
       .then((response) => {
         if (response.data.match) {
-          navigate('/home');
+          navigate(`/home/?email=${response.data.email}`);
         }
       })
       .catch((error) => {
@@ -41,7 +41,7 @@ function Login() {
             setPassword(e.target.value);
           }}></input>
 
-        <div id="login-error" style={{ color: '#FF0000', marginBottom: '20px' }}></div>
+        <div id="login-error" style={{ color: '#FF0000', marginBottom: '20px', textAlign: 'center' }}></div>
 
         <button
           type="submit"

@@ -73,6 +73,7 @@ const userController = {
 
       if (match) {
         res.locals.user_id = rows[0].id;
+        res.locals.email = rows[0].email;
         res.locals.match = match;
 
         return next();

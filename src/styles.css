@@ -113,7 +113,7 @@ a {
   flex-direction: column;
   margin: 0.5rem;
   transition: 0.2s ease-in-out;
-  border: 1px solid var(--primary-focus);
+  border: 1px solid var(--primary);
   border-radius: 0.25rem;
 
   &:hover {
@@ -126,6 +126,7 @@ a {
   justify-content: space-between;
   align-items: center;
   margin: 0.5rem;
+  margin-inline: 1rem;
 }
 
 .song-bottom {

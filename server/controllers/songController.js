@@ -14,8 +14,8 @@ const createErr = (errInfo) => {
 
 const songController = {
   async uploadSongAudio(req, res, next) {
-    const { name, project_name } = req.body;
-    const awsName = `${project_name}/${name}`;
+    const { name, project_name, email } = req.body;
+    const awsName = `${email}/${project_name}/${name}`;
     const s3 = new AWS.S3({ accessKeyId: process.env.accessKey, secretAccessKey: process.env.secretAcessKey });
 
     const uploadToS3 = (filename, bucketname, file) => {
