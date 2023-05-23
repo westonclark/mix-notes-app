@@ -51,15 +51,10 @@ function SongList() {
     <div id="songs">
       <h1>{projectName}</h1>
       <div id="upload-section">
-        <div>
-          <label role="button" id="upload" htmlFor="file">
-            Upload a File
-            <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
-          </label>
-        </div>
-        <button id="refresh" onClick={getSongs}>
-          Refresh
-        </button>
+        {/* <label role="button" class="outline" id="upload" htmlFor="file">
+          Upload a File
+          <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
+        </label> */}
       </div>
       {songList.length ? songList.map((song) => <Song key={song.id} songData={song}></Song>) : null}
     </div>

@@ -2,16 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 export default function Song({ songData }) {
-  return (
-    <div className="song">
-      <p id="song-name">{songData.name}</p>
-      <audio id="audio" src={songData.url} controls />
-      <SongNotes />
-    </div>
-  );
-}
-
-function SongNotes() {
   const [notes, setNotes] = useState([]);
   const [userInput, setUserInput] = useState('');
 
@@ -19,10 +9,6 @@ function SongNotes() {
     let copy = [...notes];
     copy = [...copy, userInput];
     setNotes(copy);
-  };
-
-  const handleChange = (e) => {
-    setUserInput(e.currentTarget.value);
   };
 
   const handleSubmit = (e) => {
@@ -34,7 +20,7 @@ function SongNotes() {
   const notesList = [];
   for (let i = 0; i < notes.length; i++) {
     notesList.push(
-      <div id="note" key={i}>
+      <div className="note" key={i}>
         <input type="checkbox"></input>
         <div className="note-text" key={notes[i]}>
           {notes[i]}
@@ -44,14 +30,20 @@ function SongNotes() {
   }
 
   return (
-    <div id="add-note-and-list">
-      <form id="input-and-button">
-        <input value={userInput} type="text" onChange={handleChange}></input>
-        <button id="add-note-button" onClick={handleSubmit}>
-          Add Note
-        </button>
-      </form>
-      <div id="notes-list">{notesList}</div>
+    <div className="song">
+      <div className="song-top">
+        <div className="song-name">{songData.name}</div>
+        <audio className="audio" src={songData.url} controls />
+        <form className="input-and-button">
+          <input className="note-input" value={userInput} type="text" onChange={(e) => setUserInput(e.target.value)}></input>
+          <button id="add-note-button" class="outline" onClick={handleSubmit}>
+            Add Note
+          </button>
+        </form>
+      </div>
+      <div className="song-bottom">
+        <div className="notes-list">{notesList}</div>
+      </div>
     </div>
   );
 }

@@ -36,6 +36,10 @@
   --switch-checked-background-color: var(--primary);
 }
 
+h1 {
+  margin-bottom: 40px !important;
+}
+
 #login,
 #signup,
 #create-project {
@@ -56,7 +60,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* align-items: center; */
 }
 
 form {
@@ -78,14 +81,12 @@ article {
 
   &:hover {
     border: 1px solid var(--primary);
-    /* --transition: 0.2s ease-in-out; */
   }
 }
 
 a {
   &:hover {
     text-decoration: none;
-    /* --transition: 0.2s ease-in-out; */
   }
 }
 
@@ -105,4 +106,80 @@ a {
 #refresh {
   width: 160px;
   margin-left: 20px;
+}
+
+.song {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  transition: 0.2s ease-in-out;
+  border: 1px solid var(--primary-focus);
+  border-radius: 0.25rem;
+
+  &:hover {
+    border: 1px solid var(--primary);
+  }
+}
+
+.song-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.song-bottom {
+  display: flex;
+}
+
+.input-and-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0px !important;
+}
+
+.song-name {
+  display: inline;
+  text-align: left;
+  text-overflow: ellipsis;
+  width: 20%;
+}
+
+.notes-list {
+  width: 100%;
+  margin-left: 1rem;
+  border-top: 1px solid var(--primary-focus);
+}
+
+.note {
+  display: flex;
+  margin: 0.5rem;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+#add-note-button {
+  margin-bottom: 0px !important;
+  margin-inline: 0.5rem;
+  width: 40%;
+  font-size: 18px;
+}
+
+.note-input {
+  margin-bottom: 0px !important;
+  margin-inline: 0.5rem;
+  font-size: 18px;
+}
+
+.note-text {
+  display: flex;
+  text-align: left;
+  word-break: break-all;
+  /* border: 1px solid red; */
+}
+
+.audio {
+  width: 30%;
 }
