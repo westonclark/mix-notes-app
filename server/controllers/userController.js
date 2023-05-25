@@ -97,6 +97,44 @@ const userController = {
       );
     }
   },
+
+  async getUserFromCookie(req, res, next) {
+    try {
+      const { user_id } = req.cookies;
+      if (user_id == '' || user_id == undefined) {
+        return next(
+          createErr({
+            location: 'getUserFromCookie',
+            type: 'request body',
+            err: 'Missing Required Fields',
+          })
+        );
+      }
+      const { rows } = await db.query(`SELECT * FROM users WHERE id = '${user_id}'`);
+
+      if (!rows.length)
+        return next(
+          createErr({
+            location: 'verifyUser',
+            type: 'reading from db',
+            err: 'Incorrect Email or Password',
+          })
+        );
+
+      res.locals.user_id = rows[0].id;
+      res.locals.email = rows[0].email;
+
+      return next();
+    } catch (err) {
+      return next(
+        createErr({
+          location: 'verifyUser',
+          type: 'reading from db',
+          err: 'Incorrect Email or Password',
+        })
+      );
+    }
+  },
 };
 
 module.exports = userController;

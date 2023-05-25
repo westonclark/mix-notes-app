@@ -1,6 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
+import more from '../assets/expand_more_FILL0_wght400_GRAD0_opsz48.png';
+
 import axios from 'axios';
 
 export default function Song({ songData }) {
@@ -24,18 +26,21 @@ export default function Song({ songData }) {
   }, []);
 
   return (
-    <div className="song">
-      <div className="song-top">
-        <div className="song-name">{songData.name}</div>
-        <audio className="audio" src={songData.url} controls />
-        <form className="input-and-button">
-          <input className="note-input" value={userInput} type="text" onChange={(e) => setUserInput(e.target.value)}></input>
-          <button id="add-note-button" className="outline" onClick={uploadNote}>
-            Add Note
-          </button>
-        </form>
+    <article className="song">
+      <div className="song-name">{songData.name}</div>
+      <audio className="audio" src={songData.url} controls />
+      <div>
+        <img src={more}></img>
       </div>
-      <div className="song-bottom">
+
+      {/* <form className="input-and-button">
+        <input className="note-input" value={userInput} type="text" onChange={(e) => setUserInput(e.target.value)}></input>
+        <button id="add-note-button" className="outline" onClick={uploadNote}>
+          Add Note
+        </button>
+      </form> */}
+
+      {/* <div className="song-bottom">
         <div className="notes-list">
           {notes
             .map((note) => {
@@ -45,8 +50,8 @@ export default function Song({ songData }) {
               return a.key - b.key;
             })}
         </div>
-      </div>
-    </div>
+      </div> */}
+    </article>
   );
 }
 

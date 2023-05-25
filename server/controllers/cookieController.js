@@ -32,7 +32,7 @@ const cookieController = {
     try {
       // If no cookie exists, redirect to login page
       if (!req.cookies.user_id) {
-        return res.redirect('/');
+        return res.redirect('/login');
       } else {
         res.locals.user_id = req.cookies.user_id;
         return next();

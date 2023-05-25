@@ -48,19 +48,33 @@ function SongList() {
   let songs = [];
 
   return (
-    <div id="songs">
-      <h1>{projectName}</h1>
-      {email !== 'null' ? (
-        <div id="upload-section">
-          <label role="button" className="outline" id="upload" htmlFor="file">
-            Upload a File
-            <input id="file" type="file" name="file" onChange={handleFileSelect}></input>
-          </label>
-        </div>
-      ) : null}
+    <>
+      {' '}
+      <nav>
+        <ul>
+          <li>MIX NOTES</li>
+        </ul>
 
-      {songList.length ? songList.map((song) => <Song key={song.id} songData={song}></Song>) : null}
-    </div>
+        <ul>
+          <li>{email}</li>
+        </ul>
+      </nav>
+      <main className="container">
+        <div id="songs">
+          {/* <h1>{projectName}</h1> */}
+          {email !== 'null' ? (
+            <div id="upload-section">
+              <label role="button" id="upload" htmlFor="file">
+                Upload a File
+                <input style={{ display: 'none' }} id="file" type="file" name="file" onChange={handleFileSelect}></input>
+              </label>
+            </div>
+          ) : null}
+
+          {songList.length ? songList.map((song) => <Song key={song.id} songData={song}></Song>) : null}
+        </div>
+      </main>
+    </>
   );
 }
 export default SongList;

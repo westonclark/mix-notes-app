@@ -4,7 +4,7 @@
 :root:not([data-theme='dark']) {
   --primary: #00897b;
   --primary-hover: #00796b;
-  --primary-focus: rgba(0, 137, 123, 0.125);
+  --primary-focus: #00897b20;
   --primary-inverse: #fff;
 }
 
@@ -36,6 +36,16 @@
   --switch-checked-background-color: var(--primary);
 }
 
+nav {
+  border-bottom: 1px solid var(--primary);
+  margin-bottom: 30px;
+  padding: 0px 30px 0px 30px;
+  background-color: var(--primary-focus);
+  // position: -webkit-sticky;
+  // position: sticky;
+  // top: 0;
+}
+
 h1 {
   text-align: center;
 }
@@ -43,40 +53,82 @@ h1 {
 #projects {
   display: flex;
   flex-direction: column;
-}
 
-button {
-  height: 60px;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 0px;
-  img {
-    height: 28px;
-    height: 28px;
-    padding-right: 15px;
+  button,
+  label {
+    height: 40px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    img {
+      height: 28px;
+      height: 28px;
+      padding-right: 15px;
+    }
+  }
+  #new-project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+
+    input {
+      margin: 0px 15px 0px 0px;
+      height: 40px;
+    }
+    button {
+      width: 250px;
+      margin: 0px;
+    }
   }
 }
 
 article {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 3rem;
   margin: 15px 0px;
   padding: 15px 20px;
   border: 1px solid var(--primary-focus);
   transition: 0.2s ease-in-out;
 
-  img {
+  div {
+    display: flex;
+    align-items: center;
     height: 100%;
-    filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
-  }
-  p {
-    margin: 0;
-    padding: 15px;
+    img {
+      height: 100%;
+      filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+    }
+    p {
+      margin: 0;
+      padding: 15px;
+    }
   }
 
   &:hover {
     border: 1px solid var(--primary);
+  }
+}
+
+#upload-section {
+  display: flex;
+  justify-content: flex-end;
+
+  #upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 40px;
+    margin-bottom: 15px;
   }
 }

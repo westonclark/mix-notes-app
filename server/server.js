@@ -9,7 +9,7 @@ const app = express();
 const PORT = 3000;
 
 // Middleware Imports
-const { storeUserData, verifyUser } = require('./controllers/userController.js');
+const { storeUserData, verifyUser, getUserFromCookie } = require('./controllers/userController.js');
 const { createProject, getProjects } = require('./controllers/projectController.js');
 const { storeSongData, uploadSongAudio, getSongs } = require('./controllers/songController.js');
 const { createNote, getNotes, updateNote, deleteNote } = require('./controllers/notesController.js');
@@ -43,8 +43,9 @@ app.post('/api/signup', storeUserData, setCookie, (req, res) => {
 
 // GET
 ////////////////////////////////////////////////////////////
-app.get('/api/projects', checkCookie, getProjects, (req, res) => {
-  return res.json(res.locals.projectList);
+
+app.get('/api/projects', checkCookie, getProjects, getUserFromCookie, (req, res) => {
+  return res.json(res.locals);
 });
 
 app.get('/api/songs/:project_id', getSongs, (req, res) => {

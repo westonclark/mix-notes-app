@@ -60,6 +60,7 @@ const projectController = {
 
       const { rows } = await db.query(`SELECT * from projects WHERE user_id = '${user_id}'`);
       res.locals.projectList = rows;
+
       return next();
     } catch (err) {
       return next(
