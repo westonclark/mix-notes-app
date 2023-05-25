@@ -1,0 +1,82 @@
+/* Teal Light scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme='light'],
+:root:not([data-theme='dark']) {
+  --primary: #00897b;
+  --primary-hover: #00796b;
+  --primary-focus: rgba(0, 137, 123, 0.125);
+  --primary-inverse: #fff;
+}
+
+/* Teal Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --primary: #00897b;
+    --primary-hover: #009688;
+    --primary-focus: rgba(0, 137, 123, 0.25);
+    --primary-inverse: #fff;
+  }
+}
+
+/* Teal Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme='dark'] {
+  --primary: #00897b;
+  --primary-hover: #009688;
+  --primary-focus: rgba(0, 137, 123, 0.25);
+  --primary-inverse: #fff;
+}
+
+/* Teal (Common styles) */
+:root {
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+}
+
+h1 {
+  text-align: center;
+}
+
+#projects {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: 60px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  img {
+    height: 28px;
+    height: 28px;
+    padding-right: 15px;
+  }
+}
+
+article {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  margin: 15px 0px;
+  padding: 15px 20px;
+  border: 1px solid var(--primary-focus);
+  transition: 0.2s ease-in-out;
+
+  img {
+    height: 100%;
+    filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+  }
+  p {
+    margin: 0;
+    padding: 15px;
+  }
+
+  &:hover {
+    border: 1px solid var(--primary);
+  }
+}
