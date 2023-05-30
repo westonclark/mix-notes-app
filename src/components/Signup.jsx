@@ -23,7 +23,7 @@ function Signup() {
   }
 
   return (
-    <div id="signup">
+    <main className="container" id="signup">
       <h1>Sign up</h1>
 
       <form>
@@ -55,7 +55,7 @@ function Signup() {
       <p>
         Already have an account? <Link to="/">Log in</Link>
       </p>
-    </div>
+    </main>
   );
 }
 export default Signup;

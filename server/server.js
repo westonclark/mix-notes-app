@@ -44,7 +44,7 @@ app.post('/api/signup', storeUserData, setCookie, (req, res) => {
 // GET
 ////////////////////////////////////////////////////////////
 
-app.get('/api/projects', checkCookie, getProjects, getUserFromCookie, (req, res) => {
+app.get('/api/project', checkCookie, getProjects, getUserFromCookie, (req, res) => {
   return res.json(res.locals);
 });
 

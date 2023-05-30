@@ -38,28 +38,37 @@
 
 nav {
   border-bottom: 1px solid var(--primary);
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   padding: 0px 30px 0px 30px;
   background-color: var(--primary-focus);
   // position: -webkit-sticky;
-  // position: sticky;
+  position: sticky;
   // top: 0;
 }
 
 h1 {
   text-align: center;
+  // margin-bottom: 30px;
+}
+
+#login,
+#signup {
+  margin-top: 20vh;
+  width: 40vw;
+  // border: 1px solid var(--primary);
+  // border-radius: 1rem;
+  // padding: 30px;
 }
 
 #projects {
   display: flex;
   flex-direction: column;
 
-  button,
-  label {
-    height: 40px;
-    width: auto;
+  button {
     display: flex;
     align-items: center;
+    width: auto;
+    height: 50px;
     margin-bottom: 15px;
 
     img {
@@ -68,6 +77,7 @@ h1 {
       padding-right: 15px;
     }
   }
+
   #new-project {
     display: flex;
     align-items: center;
@@ -81,54 +91,129 @@ h1 {
 
     input {
       margin: 0px 15px 0px 0px;
-      height: 40px;
+      height: 50px;
     }
     button {
       width: 250px;
       margin: 0px;
     }
   }
-}
 
-article {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 3rem;
-  margin: 15px 0px;
-  padding: 15px 20px;
-  border: 1px solid var(--primary-focus);
-  transition: 0.2s ease-in-out;
-
-  div {
+  article {
     display: flex;
     align-items: center;
-    height: 100%;
-    img {
+    justify-content: space-between;
+    height: 3rem;
+    margin: 15px 0px;
+    padding: 15px 20px;
+    border: 1px solid var(--primary-focus);
+    transition: 0.2s ease-in-out;
+
+    div {
+      display: flex;
+      align-items: center;
       height: 100%;
-      filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+      img {
+        height: 100%;
+        filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+      }
+      p {
+        margin: 0;
+        padding: 15px;
+      }
     }
-    p {
-      margin: 0;
-      padding: 15px;
-    }
-  }
 
-  &:hover {
-    border: 1px solid var(--primary);
+    &:hover {
+      border: 1px solid var(--primary);
+    }
   }
 }
 
-#upload-section {
-  display: flex;
-  justify-content: flex-end;
+#songs {
+  #project-name {
+    // margin-bottom: 30px;
+  }
+  #upload-section {
+    // display: flex;
+    // justify-content: flex-end;
 
-  #upload {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 170px;
-    height: 40px;
-    margin-bottom: 15px;
+    #upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // width: 170px;
+      height: 50px;
+      margin-bottom: 15px;
+
+      img {
+        height: 30px;
+        filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+        height: 28px;
+        height: 28px;
+        // padding-right: 15px;
+      }
+    }
+  }
+
+  .song {
+    border: 1px solid var(--primary-focus);
+    margin: 15px 0px;
+    padding: 15px 20px;
+    height: 3rem;
+    transition: 0.2s ease-in-out;
+
+    .song-top {
+      // height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.2s ease-in-out;
+
+      .song-name {
+        display: flex;
+        align-items: center;
+      }
+
+      img {
+        height: 30px;
+        filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
+        height: 28px;
+        height: 28px;
+        padding-right: 15px;
+      }
+    }
+
+    .song-bottom {
+      display: flex;
+      flex-direction: column;
+
+      hr {
+        margin: 1rem 0rem 1rem 0rem;
+        width: 100%;
+        border: 1px solid var(--primary-focus);
+      }
+      .input-and-button {
+        display: flex;
+        width: 50%;
+
+        input {
+          height: 50px;
+          width: 200%;
+          margin: 0px 15px 0px 0px;
+
+          // border: 1px solid red;
+        }
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+        }
+      }
+    }
+
+    &:hover {
+      border: 1px solid var(--primary);
+    }
   }
 }

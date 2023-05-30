@@ -16,15 +16,15 @@ function ProjectList() {
 
   function getProjects() {
     axios
-      .get('/api/projects')
+      .get('/api/project')
       .then((response) => {
         setProjects(response.data.projectList);
         setEmail(response.data.email);
         setIsAdmin(true);
       })
       .catch((error) => {
-        if (error.response.status == 301) navigate('login');
-        console.log(error.response);
+        // if (error.response.status == 301) navigate('/login');
+        console.log(error);
       });
   }
 
@@ -38,6 +38,7 @@ function ProjectList() {
         <ul>
           <li>MIX NOTES</li>
         </ul>
+
         <ul>
           <li>{email}</li>
         </ul>
@@ -45,17 +46,7 @@ function ProjectList() {
 
       <main className="container">
         <div id="projects">
-          <div id="new-project">
-            <div>{showForm ? <NewProject getProjects={getProjects} setShowForm={setShowForm}></NewProject> : null}</div>
-            <button
-              id="show-form"
-              className={showForm ? 'secondary' : ''}
-              onClick={() => {
-                showForm ? setShowForm(false) : setShowForm(true);
-              }}>
-              New Project
-            </button>
-          </div>
+          <h1 id="project-name">Projects</h1>
 
           <section>
             {projects
@@ -83,6 +74,17 @@ function ProjectList() {
                 }
                 return 0;
               })}
+            <div id="new-project">
+              <div>{showForm ? <NewProject getProjects={getProjects} setShowForm={setShowForm}></NewProject> : null}</div>
+              <button
+                id="show-form"
+                className={showForm ? 'secondary' : ''}
+                onClick={() => {
+                  showForm ? setShowForm(false) : setShowForm(true);
+                }}>
+                <img src={addFolder} alt="" />
+              </button>
+            </div>
           </section>
         </div>
       </main>

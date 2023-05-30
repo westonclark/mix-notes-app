@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import plus from '../assets/add_FILL0_wght400_GRAD0_opsz48.png';
+
 import axios from 'axios';
 
 import Song from './Song.jsx';
@@ -61,17 +63,17 @@ function SongList() {
       </nav>
       <main className="container">
         <div id="songs">
-          {/* <h1>{projectName}</h1> */}
+          <h1 id="project-name">{projectName}</h1>
+
+          {songList.length ? songList.map((song) => <Song key={song.id} songData={song}></Song>) : null}
           {email !== 'null' ? (
             <div id="upload-section">
-              <label role="button" id="upload" htmlFor="file">
-                Upload a File
+              <label role="button" className="outline" id="upload" htmlFor="file">
+                <img src={plus}></img>
                 <input style={{ display: 'none' }} id="file" type="file" name="file" onChange={handleFileSelect}></input>
               </label>
             </div>
           ) : null}
-
-          {songList.length ? songList.map((song) => <Song key={song.id} songData={song}></Song>) : null}
         </div>
       </main>
     </>

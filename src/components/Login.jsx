@@ -13,7 +13,7 @@ function Login() {
       .post('/api/login', { email, password })
       .then((response) => {
         if (response.data.match) {
-          navigate(`/home/?email=${response.data.email}`);
+          navigate(`/`);
         }
       })
       .catch((error) => {
@@ -23,7 +23,7 @@ function Login() {
   }
 
   return (
-    <div id="login">
+    <main id="login" className="container">
       <h1>Log in</h1>
 
       <form>
@@ -55,7 +55,7 @@ function Login() {
       <p>
         Don't have an account? <Link to="/signup">Sign up</Link>
       </p>
-    </div>
+    </main>
   );
 }
 export default Login;

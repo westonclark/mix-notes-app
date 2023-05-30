@@ -2,10 +2,13 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 import more from '../assets/expand_more_FILL0_wght400_GRAD0_opsz48.png';
+import less from '../assets/expand_less_FILL0_wght400_GRAD0_opsz48.png';
+import audiofile from '../assets/audio_file_FILL0_wght400_GRAD0_opsz48.png';
 
 import axios from 'axios';
 
 export default function Song({ songData }) {
+  const [showNotes, setShowNotes] = useState(false);
   const [notes, setNotes] = useState([]);
   const [userInput, setUserInput] = useState('');
 
@@ -26,32 +29,44 @@ export default function Song({ songData }) {
   }, []);
 
   return (
-    <article className="song">
-      <div className="song-name">{songData.name}</div>
-      <audio className="audio" src={songData.url} controls />
-      <div>
-        <img src={more}></img>
-      </div>
-
-      {/* <form className="input-and-button">
-        <input className="note-input" value={userInput} type="text" onChange={(e) => setUserInput(e.target.value)}></input>
-        <button id="add-note-button" className="outline" onClick={uploadNote}>
-          Add Note
-        </button>
-      </form> */}
-
-      {/* <div className="song-bottom">
-        <div className="notes-list">
-          {notes
-            .map((note) => {
-              return <Note key={note.id} note={note}></Note>;
-            })
-            .sort((a, b) => {
-              return a.key - b.key;
-            })}
+    <>
+      <article className="song" style={{ height: showNotes ? 'auto' : '3rem' }}>
+        <div className="song-top" style={{ height: showNotes ? '28px' : '100%' }}>
+          <div className="song-name">
+            <img src={audiofile}></img>
+            {songData.name}
+          </div>
+          <audio className="audio" src={songData.url} controls />
+          <div>
+            <img
+              src={!showNotes ? more : less}
+              onClick={() => {
+                showNotes ? setShowNotes(false) : setShowNotes(true);
+              }}></img>
+          </div>
         </div>
-      </div> */}
-    </article>
+        {showNotes ? (
+          <div className="song-bottom">
+            <hr className="solid"></hr>
+            {/* <form className="input-and-button">
+              <input className="note-input" value={userInput} type="text" onChange={(e) => setUserInput(e.target.value)}></input>
+              <button id="add-note-button" onClick={uploadNote}>
+                Add Note
+              </button>
+            </form> */}
+            <div className="notes-list">
+              {notes
+                .map((note) => {
+                  return <Note key={note.id} note={note}></Note>;
+                })
+                .sort((a, b) => {
+                  return a.key - b.key;
+                })}
+            </div>
+          </div>
+        ) : null}
+      </article>
+    </>
   );
 }
 
