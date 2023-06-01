@@ -67,21 +67,29 @@ h1 {
   button {
     display: flex;
     align-items: center;
-    width: auto;
+    justify-content: center;
     height: 50px;
     margin-bottom: 15px;
+    border: 1px solid var(--primary-focus);
+
+    &:hover {
+      border: 1px solid var(--primary);
+    }
 
     img {
       height: 28px;
       height: 28px;
       padding-right: 15px;
+      filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);
     }
   }
 
   #new-project {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
+    width: 100%;
   }
 
   form {
@@ -144,6 +152,11 @@ h1 {
       // width: 170px;
       height: 50px;
       margin-bottom: 15px;
+      border: 1px solid var(--primary-focus);
+
+      &:hover {
+        border: 1px solid var(--primary);
+      }
 
       img {
         height: 30px;
@@ -173,7 +186,9 @@ h1 {
         display: flex;
         align-items: center;
       }
-
+      audio {
+        // height: 30px;
+      }
       img {
         height: 30px;
         filter: invert(41%) sepia(24%) saturate(2270%) hue-rotate(132deg) brightness(91%) contrast(101%);

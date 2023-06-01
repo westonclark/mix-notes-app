@@ -46,7 +46,7 @@ function ProjectList() {
 
       <main className="container">
         <div id="projects">
-          <h1 id="project-name">Projects</h1>
+          {/* <h1 id="project-name">Projects</h1> */}
 
           <section>
             {projects
@@ -75,15 +75,15 @@ function ProjectList() {
                 return 0;
               })}
             <div id="new-project">
-              <div>{showForm ? <NewProject getProjects={getProjects} setShowForm={setShowForm}></NewProject> : null}</div>
               <button
                 id="show-form"
-                className={showForm ? 'secondary' : ''}
+                className={showForm ? 'secondary' : 'outline'}
                 onClick={() => {
                   showForm ? setShowForm(false) : setShowForm(true);
                 }}>
                 <img src={addFolder} alt="" />
               </button>
+              <div>{showForm ? <NewProject getProjects={getProjects} setShowForm={setShowForm}></NewProject> : null}</div>
             </div>
           </section>
         </div>

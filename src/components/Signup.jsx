@@ -13,7 +13,7 @@ function Signup() {
       .post('/api/signup', { email, password })
       .then((response) => {
         if (response.data.match) {
-          navigate('/home');
+          navigate('/');
         }
       })
       .catch((error) => {
@@ -53,7 +53,7 @@ function Signup() {
       </form>
 
       <p>
-        Already have an account? <Link to="/">Log in</Link>
+        Already have an account? <Link to="/login">Log in</Link>
       </p>
     </main>
   );

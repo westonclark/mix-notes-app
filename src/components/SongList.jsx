@@ -58,7 +58,9 @@ function SongList() {
         </ul>
 
         <ul>
-          <li>{email}</li>
+          <li>
+            <a href="/">{email}</a>
+          </li>
         </ul>
       </nav>
       <main className="container">

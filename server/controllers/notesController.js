@@ -107,8 +107,9 @@ const notesController = {
           })
         );
       }
-
-      await db.query(`DELETE FROM notes WHERE id = '${note_id}'`);
+      console.log(note_id);
+      const { rows } = await db.query(`DELETE FROM notes WHERE id = '${note_id}'`);
+      console.log(rows);
       return next();
     } catch (err) {
       return next(

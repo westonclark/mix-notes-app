@@ -86,7 +86,7 @@ app.delete('/songs/:song_id', (req, res) => {
   return res.sendStatus(200);
 });
 
-app.delete('/notes/:note_id', deleteNote, (req, res) => {
+app.delete('/api/notes/:note_id', deleteNote, (req, res) => {
   return res.sendStatus(200);
 });
 
